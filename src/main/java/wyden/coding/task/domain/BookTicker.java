@@ -1,11 +1,15 @@
 package wyden.coding.task.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 
+@Getter
+@EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(staticName = "of")
 @ToString
 public class BookTicker {
     @JsonProperty("s")

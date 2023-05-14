@@ -1,10 +1,13 @@
 package wyden.coding.task.infrastructure;
 
 import jakarta.websocket.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
 import java.nio.ByteBuffer;
+
 @ClientEndpoint
+@Slf4j
 public class WebsocketClientEndpoint {
 
     Session userSession = null;
@@ -21,14 +24,14 @@ public class WebsocketClientEndpoint {
 
     @OnOpen
     public void onOpen(Session userSession) {
-        System.out.println("opening websocket");
         this.userSession = userSession;
+        log.info("session opened {}", userSession);
     }
 
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-        System.out.println("closing websocket");
         this.userSession = null;
+        log.info("closing websocket");
     }
 
     @OnMessage
@@ -47,14 +50,11 @@ public class WebsocketClientEndpoint {
         this.messageHandler = msgHandler;
     }
 
-
     public void sendMessage(String message) {
         this.userSession.getAsyncRemote().sendText(message);
     }
 
     public static interface MessageHandler {
-
         public void handleMessage(String message);
     }
-
 }
