@@ -12,7 +12,6 @@ import wyden.coding.task.infrastructure.JsonMarshaller;
 @Configuration
 class ApplicationConfiguration {
 
-
     @Bean
     BinanceClient binanceWebSocketClient(@Value("${binance.url}") String ulr, @Value("${binance.stream-symbol}") String symbol,
                                          JsonMarshaller jsonMarshaller) {
@@ -25,11 +24,9 @@ class ApplicationConfiguration {
 
     @Bean
     JsonMarshaller jsonMarshaller() {
-        ObjectMapper writer = new ObjectMapper();
-        writer.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        ObjectMapper reader = new ObjectMapper();
-        reader.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return new JsonMarshaller(writer, reader);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return new JsonMarshaller(mapper);
     }
 
 }

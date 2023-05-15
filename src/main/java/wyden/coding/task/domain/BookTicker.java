@@ -1,7 +1,10 @@
 package wyden.coding.task.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
+import wyden.coding.task.infrastructure.PriceSerializer;
 
 import java.math.BigDecimal;
 
@@ -15,11 +18,15 @@ public class BookTicker {
     @JsonProperty("s")
     private String symbol;
     @JsonProperty("b")
-    private BigDecimal bestBidPrice;
+    @JsonDeserialize(using = PriceSerializer.class)
+    private Price bestBidPrice;
     @JsonProperty("B")
-    private BigDecimal bestBidQuantity;
+    @JsonDeserialize(using = PriceSerializer.class)
+    private Price bestBidQuantity;
     @JsonProperty("a")
-    private BigDecimal bestAskPrice;
+    @JsonDeserialize(using = PriceSerializer.class)
+    private Price bestAskPrice;
     @JsonProperty("A")
-    private BigDecimal bestAskQuantity;
+    @JsonDeserialize(using = PriceSerializer.class)
+    private Price bestAskQuantity;
 }

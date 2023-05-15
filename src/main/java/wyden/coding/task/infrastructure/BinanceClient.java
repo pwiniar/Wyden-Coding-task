@@ -1,6 +1,7 @@
 package wyden.coding.task.infrastructure;
 
 import lombok.extern.slf4j.Slf4j;
+import wyden.coding.task.domain.BookTicker;
 import wyden.coding.task.domain.Subscribe;
 
 import java.net.URI;
@@ -42,7 +43,7 @@ public class BinanceClient {
     public void addHandler() {
         endpoint.addMessageHandler(new WebsocketClientEndpoint.MessageHandler() {
             public void handleMessage(String message) {
-                log.info(jsonMarshaller.getBookTicker(message).toString());
+                log.info(jsonMarshaller.getBookTicker(message, BookTicker.class).toString());
             }
         });
     }
