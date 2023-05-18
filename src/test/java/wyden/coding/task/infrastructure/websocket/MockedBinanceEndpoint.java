@@ -5,9 +5,11 @@ import jakarta.websocket.ClientEndpointConfig;
 import org.glassfish.tyrus.client.ClientManager;
 import wyden.coding.task.infrastructure.websocket.BinanceEndpoint;
 
+import java.util.function.Consumer;
+
 class MockedBinanceEndpoint extends BinanceEndpoint {
 
-    public MockedBinanceEndpoint(ClientManager client, ClientEndpointConfig config, ObjectMapper mapper) {
-        super(client, config, mapper);
+    public MockedBinanceEndpoint(ClientManager client, ClientEndpointConfig config, ObjectMapper mapper, Consumer<String> callback) {
+        super(client, config, mapper, callback);
     }
 }

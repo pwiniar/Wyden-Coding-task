@@ -15,11 +15,12 @@ class BinanceClientFacadeTest {
 
     private BinanceClientFacade sut;
     private MockedSession session;
+    List<String> messages = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {
         MockedBinanceEndpoint endpoint = new MockedBinanceEndpoint(new MockClientManager(), ClientEndpointConfig.Builder.create().build(),
-                new ObjectMapper());
+                new ObjectMapper(), messages::add);
         this.session = new MockedSession();
         endpoint.onOpen(session, null);
         this.sut = new BinanceClientFacade(endpoint);
@@ -28,12 +29,11 @@ class BinanceClientFacadeTest {
     @Test
     @DisplayName("should connect to server endpoint subscribe for trade data and get confirmation about subscription")
     void name() {
-        List<String> elements = new ArrayList<>();
-        sut.subscribeForTrade(elements::add);
+        sut.subscribeForTrade();
 
         session.messageHandler.onMessage("{\"result\":null,\"id\":1}");
-        Assertions.assertEquals(1, elements.size());
-        Assertions.assertTrue(elements.contains("{\"result\":null,\"id\":1}"));
+        Assertions.assertEquals(1, messages.size());
+        Assertions.assertTrue(messages.contains("{\"result\":null,\"id\":1}"));
     }
 
 
