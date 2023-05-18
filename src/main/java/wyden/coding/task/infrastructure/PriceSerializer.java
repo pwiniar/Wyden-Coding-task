@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class PriceSerializer extends JsonDeserializer<Price> {
-
     @Override
     public Price deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
         return Price.of(new BigDecimal(jsonParser.getText()));

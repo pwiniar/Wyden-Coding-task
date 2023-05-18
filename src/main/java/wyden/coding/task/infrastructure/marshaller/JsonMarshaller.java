@@ -1,4 +1,4 @@
-package wyden.coding.task.infrastructure;
+package wyden.coding.task.infrastructure.marshaller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

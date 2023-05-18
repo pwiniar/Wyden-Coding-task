@@ -11,6 +11,6 @@ import java.math.BigDecimal;
 @ToString
 public class Quantity {
 
-    private BigDecimal quantity;
+    private Price quantity;
 
 }
